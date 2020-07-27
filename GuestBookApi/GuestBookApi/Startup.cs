@@ -41,7 +41,7 @@ namespace GuestBookApi
 
             app.UseRouting();
             app.UseCors(builder => builder
-                .WithOrigins("http://localhost:8080", "http://192.168.0.42:8080")
+                .WithOrigins("http://192.168.0.100:8080", "http://192.168.0.42:8080")
                 .AllowCredentials()
                 .AllowAnyMethod()
                 .AllowAnyHeader());

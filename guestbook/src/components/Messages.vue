@@ -121,7 +121,7 @@ export default {
       this.windowHeight = window.innerHeight;
     },
     paging(pageNumber, sortColumn, descendingOrder) {
-      return pageNumber + "," + sortColumn + "," + descendingOrder;
+      return pageNumber + "&" + sortColumn + "&" + descendingOrder;
     },
 
     localeDateTimeString(date) {

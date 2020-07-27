@@ -9,17 +9,17 @@ export const router = new Router({
     routes: [
         {
             path: "*",
-            redirect: { path: "/messages/1,userName,false" }
+            redirect: { path: "/messages/1&userName&false" }
         },
         {
             name: "messages",
-            path: "/messages/:pageNumber,:sortColumn,:descendingOrder",
+            path: "/messages/:pageNumber&:sortColumn&:descendingOrder",
             component: () => import('./components/Messages.vue'),
             props: true
         },
         {
             name: "create-message",
-            path: "/create-message/:pageNumber,:sortColumn,:descendingOrder",
+            path: "/create-message/:pageNumber&:sortColumn&:descendingOrder",
             component: () => import('./components/CreateMessage.vue'),
             props: true
         }

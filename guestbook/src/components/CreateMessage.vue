@@ -102,9 +102,9 @@ export default {
       return (
         "/messages/" +
         this.pageNumber +
-        "," +
+        "&" +
         this.sortColumn +
-        "," +
+        "&" +
         this.descendingOrder
       );
     },

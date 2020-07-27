@@ -1,4 +1,4 @@
-const API_URL = 'http://192.168.0.42:5000/messages';
+const API_URL = 'http://localhost:58106/messages';
 
 import axios from 'axios';
 
@@ -10,6 +10,7 @@ export const MessagesService = {
                 return Promise.resolve(result);
             })
             .catch(error => {
+                console.info(error);
                 return Promise.reject(error);
             });
     },
