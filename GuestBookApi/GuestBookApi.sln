@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuestBookApi", "GuestBookApi\GuestBookApi.csproj", "{1ADD18ED-2621-46CE-9696-A5815683D4FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1ADD18ED-2621-46CE-9696-A5815683D4FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ADD18ED-2621-46CE-9696-A5815683D4FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ADD18ED-2621-46CE-9696-A5815683D4FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ADD18ED-2621-46CE-9696-A5815683D4FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CDA638F3-A5AC-42B7-B047-A1BB95CBE391}
+	EndGlobalSection
+EndGlobal
