@@ -14,6 +14,7 @@
 - vuex
 - vue-router
 - vee-validate
+
 Верстка адаптивная
 
 Бэкенд:
