@@ -23,18 +23,23 @@
 
 ## Установка сервера веб-API
 Проект находится в папке GuestBookApi.
+
 Для сборки проекта использовалась Microsoft Visual Studio Community 2019.
+
 Запускаем файл проекта
 ```
 GuestBookApi.sln
 ```
 Публикуем проект в папку C:/GuestBookApi
+
 Публикуем файл БД GuestBook.mdf
+
 Запускаем исполняемый файл C:/GuestBookApi/GuestBookApi.exe
 
 ## Установка сервера клиентской части пользовательского интерфейса
 
 Проект находится в папке "guestbook".
+
 Для сборки проекта необходим NodeJS. Инструкция для его установки находится по следующему адресу: [https://nodejs.org/ru/download/package-manager/](https://nodejs.org/ru/download/package-manager/)
 
 Установив NodeJS переходим в папку с проектом и в консоли выполняем следующие комманды:
