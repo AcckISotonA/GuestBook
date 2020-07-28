@@ -1,6 +1,6 @@
 ﻿using GuestBookApi.Models;
 using GuestBookApi.Models.MessageList;
-using GuestBookApi.Models.Responce;
+using GuestBookApi.Models.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace GuestBookApi.Services.MessageList
 {
     public interface IMessageListService
     {
-        MessageListResponce GetMessageList(PagingParameters pagingParameters);
-        void SaveMessage(SaveMessageParameters saveMessageParameters, string ip, string browser);
+        MessageListResponse GetMessageList(PagingParameters pagingParameters);
+        void SaveMessage(MessageRequest messageRequest, string ip, string browser);
     }
 }

@@ -109,11 +109,9 @@ export default {
     },
 
     isDescendingOrder() {
-      return this.descendingOrder == "true"
-        ? true
-        : this.descendingOrder == "false"
-        ? false
-        : undefined;
+      if (this.descendingOrder == "true") return true;
+      if (this.descendingOrder == "false") return false;
+      return undefined;
     },
   },
   methods: {
@@ -162,8 +160,7 @@ export default {
           )
           .then(() => {
             this.loadMessageList();
-          })
-          .catch(() => {});
+          });
       }
     },
   },
@@ -182,8 +179,7 @@ export default {
           )
           .then(() => {
             this.loadMessageList();
-          })
-          .catch(() => {});
+          });
       }
     },
   },
@@ -204,8 +200,7 @@ export default {
         .push("/messages/" + this.paging(1, "userName", false))
         .then(() => {
           this.loadMessageList();
-        })
-        .catch(() => {});
+        });
     } else this.loadMessageList();
   },
 };

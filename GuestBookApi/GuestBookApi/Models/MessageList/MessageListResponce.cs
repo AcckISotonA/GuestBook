@@ -1,13 +1,11 @@
 using GuestBookApi.Models.MessageList;
-using System;
 using System.Collections.Generic;
-using System.Data;
 
-namespace GuestBookApi.Models.Responce
+namespace GuestBookApi.Models.Response
 {
-    public class MessageListResponce
+    public class MessageListResponse
     {
-        public List<Message> MessageList { get; set; } = new List<Message>();
+        public IEnumerable<MessageView> MessageList { get; set; }
         public int RowsCount { get; set; }
     }
 }

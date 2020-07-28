@@ -1,8 +1,8 @@
 ﻿using GuestBookApi.Models;
 using GuestBookApi.Models.MessageList;
-using GuestBookApi.Models.Responce;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Net;
@@ -18,15 +18,13 @@ namespace GuestBookApi.Repository.Messages
             _configuration = configuration;
         }
 
-        public MessageListResponce GetMessages(PagingParameters pagingParameters)
+        public IEnumerable<MessageView> GetMessages(PagingParameters pagingParameters, out int rowsCount)
         {
-            MessageListResponce result = new MessageListResponce();
+            List<MessageView> result = new List<MessageView>();
 
             using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-
-                DataTable dt = new DataTable();
 
                 using (SqlCommand command = new SqlCommand("dbo.GetMessages", connection))
                 {
@@ -43,7 +41,8 @@ namespace GuestBookApi.Repository.Messages
                     {
                         while (dataReader.Read())
                         {
-                            result.MessageList.Add(new Message
+
+                            result.Add(new MessageView
                             {
                                 DateC = dataReader.GetDateTime("DateC"),
                                 UserName = dataReader.GetString("UserName"),
@@ -52,7 +51,7 @@ namespace GuestBookApi.Repository.Messages
                             });
                         }
                         dataReader.NextResult();
-                        result.RowsCount = Convert.ToInt32(command.Parameters["@RowsCount"].Value);
+                        rowsCount = Convert.ToInt32(command.Parameters["@RowsCount"].Value ?? 0);
                     }
                 }
                 connection.Close();
@@ -61,25 +60,23 @@ namespace GuestBookApi.Repository.Messages
             return result;
         }
 
-        public void SaveMessage(SaveMessageParameters saveMessageParameters, string ip, string browser)
+        public void SaveMessage(Message message)
         {
             using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-
-                DataTable dt = new DataTable();
 
                 using (SqlCommand command = new SqlCommand("dbo.SaveMessage", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.CommandTimeout = 360;
                     // Параметры
-                    command.Parameters.Add("@Ip", SqlDbType.NVarChar, 15).Value = ip;
-                    command.Parameters.Add("@Browser", SqlDbType.NVarChar, 15).Value = browser;
-                    command.Parameters.Add("@UserName", SqlDbType.NVarChar, 20).Value = saveMessageParameters.UserName;
-                    command.Parameters.Add("@Email", SqlDbType.NVarChar, 20).Value = saveMessageParameters.Email;
-                    command.Parameters.Add("@Homepage", SqlDbType.NVarChar, 2000).Value = saveMessageParameters.Homepage;
-                    command.Parameters.Add("@Text", SqlDbType.NVarChar).Value = WebUtility.HtmlEncode(saveMessageParameters.Text);
+                    command.Parameters.Add("@Ip", SqlDbType.NVarChar, 15).Value = message.Ip ?? "";
+                    command.Parameters.Add("@Browser", SqlDbType.NVarChar, 15).Value = message.Browser ?? "";
+                    command.Parameters.Add("@UserName", SqlDbType.NVarChar, 20).Value = message.UserName;
+                    command.Parameters.Add("@Email", SqlDbType.NVarChar, 20).Value = message.Email;
+                    command.Parameters.Add("@Homepage", SqlDbType.NVarChar, 2000).Value = WebUtility.HtmlEncode(message.Homepage);
+                    command.Parameters.Add("@Text", SqlDbType.NVarChar).Value = WebUtility.HtmlEncode(message.Text);
 
                     command.ExecuteNonQuery();
                 }

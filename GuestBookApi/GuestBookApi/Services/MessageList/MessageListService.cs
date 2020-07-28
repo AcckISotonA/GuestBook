@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GuestBookApi.Models;
 using GuestBookApi.Models.MessageList;
-using GuestBookApi.Models.Responce;
+using GuestBookApi.Models.Response;
 using GuestBookApi.Repository.Messages;
 using Microsoft.Extensions.Configuration;
 
@@ -14,19 +14,34 @@ namespace GuestBookApi.Services.MessageList
     {
         private IMessagesRepository _messagesRepository;
 
-        public MessageListService(IConfiguration configuration)
+        public MessageListService(IMessagesRepository messagesRepository)
         {
-            _messagesRepository = new MessagesRepository(configuration);
+            _messagesRepository = messagesRepository;
         }
 
-        public MessageListResponce GetMessageList(PagingParameters pagingParameters)
+        public MessageListResponse GetMessageList(PagingParameters pagingParameters)
         {
-            return _messagesRepository.GetMessages(pagingParameters);
+            int rowsCount = 0;
+            MessageListResponse result = new MessageListResponse
+            {
+                MessageList = _messagesRepository.GetMessages(pagingParameters, out rowsCount),
+                RowsCount = rowsCount
+            };
+            return result;
         }
 
-        public void SaveMessage(SaveMessageParameters saveMessageParameters, string ip, string browser)
+        public void SaveMessage(MessageRequest messageRequest, string ip, string browser)
         {
-            _messagesRepository.SaveMessage(saveMessageParameters, ip, browser);
+            var message = new Message {
+                UserName = messageRequest.UserName,
+                Email = messageRequest.Email,
+                Homepage = messageRequest.Homepage,
+                Text = messageRequest.Text,
+                Ip = ip,
+                Browser = browser
+            };
+
+            _messagesRepository.SaveMessage(message);
         }
     }
 }

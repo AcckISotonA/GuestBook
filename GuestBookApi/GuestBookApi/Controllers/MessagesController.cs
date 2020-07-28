@@ -8,6 +8,7 @@ using GuestBookApi.Models.MessageList;
 using GuestBookApi.Services.MessageList;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace GuestBookApi.Controllers
 {
@@ -16,7 +17,7 @@ namespace GuestBookApi.Controllers
     public class MessagesController : ControllerBase
     {
         private readonly ILogger<MessagesController> _logger;
-        private IMessageListService _messageListService;
+        private readonly IMessageListService _messageListService;
 
         public MessagesController(ILogger<MessagesController> logger, IMessageListService messageListService)
         {
@@ -28,29 +29,30 @@ namespace GuestBookApi.Controllers
         public IActionResult GetMessages([FromQuery]PagingParameters pagingParameters)
         {
             try
-            {
-
-                return new JsonResult(_messageListService.GetMessageList(pagingParameters));
+            { 
+                return Ok(_messageListService.GetMessageList(pagingParameters));
             }
             catch (Exception e)
             {
-                return new BadRequestObjectResult(e.Message);
+                _logger.LogCritical(e.Message);
+                return new StatusCodeResult(500);
             }
         }
 
         [HttpPut("savemessage")]
-        public IActionResult SaveMessage([FromBody]SaveMessageParameters saveMessageParameters)
+        public IActionResult SaveMessage([FromBody]MessageRequest messageRequest)
         {
             try
             {
-                var userAgent = HttpContext.Request.Headers["User-Agent"];
+                var userAgent = HttpContext.Request.Headers.ContainsKey("User-Agent") ? HttpContext.Request.Headers["User-Agent"].FirstOrDefault() : null;
 
-                _messageListService.SaveMessage(saveMessageParameters, HttpContext.Connection.RemoteIpAddress.ToString(), Convert.ToString(userAgent[0]));
-                return new OkResult();
+                _messageListService.SaveMessage(messageRequest, HttpContext.Connection.RemoteIpAddress.ToString(), userAgent);
+                return Ok();
             }
             catch (Exception e)
             {
-                return new BadRequestObjectResult(e.Message);
+                _logger.LogCritical(e.Message);
+                return new StatusCodeResult( 500 );
             }
         }
     }
