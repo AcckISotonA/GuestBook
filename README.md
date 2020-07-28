@@ -22,8 +22,8 @@
 Взаимодействие с БД реализовано без использования Entity Framework или других готовых ORM.
 
 ## Установка программно-аппаратной части
-Проект находится в папке GuestBookApi
-Я для сборки проекта использовал Microsoft Visual Studio Community 2019.
+Проект находится в папке GuestBookApi.
+Для сборки проекта использовалась Microsoft Visual Studio Community 2019.
 Запускаем файл проекта
 ```
 GuestBookApi.sln
