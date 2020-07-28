@@ -28,8 +28,9 @@
 ```
 GuestBookApi.sln
 ```
-Публикуем проект в папку C:/GuestBookApi и запускаем исполняемый файл GuestBookApi.exe
-Копируем файл БД /GuestBookApi/GuestBookApi/GuestBook.mdf в папку C:/GuestBookApi
+Публикуем проект в папку C:/GuestBookApi
+Публикуем файл БД GuestBook.mdf
+Запускаем исполняемый файл C:/GuestBookApi/GuestBookApi.exe
 
 ## Установка сервера клиентской части пользовательского интерфейса
 
