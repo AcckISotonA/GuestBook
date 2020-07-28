@@ -16,11 +16,20 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    "Kestrel (dotnet run)": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "launchUrl": "http://localhost:58106/",
+      "externalUrlConfiguration": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
     "GuestBookApi": {
       "commandName": "Project",
       "launchBrowser": false,
       "launchUrl": "",
-      "applicationUrl": "https://localhost:5001;http://192.168.0.42:5000",
+      "applicationUrl": "http://localhost:58106",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

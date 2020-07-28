@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:58106/messages';
+import config from "./config.json"
+const API_URL = config.apiUrl + '/messages';
 
 import axios from 'axios';
 
