@@ -35,8 +35,8 @@ GuestBookApi.sln
 
 Проект находится в папке "guestbook".
 Для сборки проекта необходим NodeJS. Инструкция для его установки находится по следующему адресу: [https://nodejs.org/ru/download/package-manager/](https://nodejs.org/ru/download/package-manager/)
-После его установки переходим в папку с проектом.
-В консоли необходимо выполнить следующие комманды:
+
+Установив NodeJS переходим в папку с проектом и в консоли выполняем следующие комманды:
 ```
 npm run build
 npm run serve
