@@ -21,66 +21,27 @@
 
 Взаимодействие с БД реализовано без использования Entity Framework или других готовых ORM.
 
-## Установка программно-аппаратной части
+## Установка сервера веб-API
 Проект находится в папке GuestBookApi.
 Для сборки проекта использовалась Microsoft Visual Studio Community 2019.
 Запускаем файл проекта
 ```
 GuestBookApi.sln
 ```
-Указываем строку подключения к файлу БД ./GuestBookApi/GuestBookApi/GuestBook.mdf. Для этого в файле концигурации appsettings.json меняем:
-```
-ConnectionStrings/DBConnection
-```
-В DBConnection в параметре AttachDbFilename прописываем полный путь к файлу БД. В моём случае строка подключения выглядит следующим образом:
-```
-  "ConnectionStrings": {
-    "DBConnection": "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\devel\\GuestBook\\GuestBookApi\\GuestBookApi\\GuestBook.mdf;Integrated Security=True;Connect Timeout=30"
-  },
-```
-Установка параметра Origins. В нем указываем IP адрес и порт на котором будет запущена клиентская часть пользовательского интерфейса. Пример:
-```
-  "Origins": [ "http://localhost:8080" ],
-```
-Указываем IP адрес и порт на котором будет запущена программно-аппаратная часть. Для этого в файле концигурации appsettings.json меняем:
-```
-Kestrel/Endpoints/Http/Url
-```
-Пример:
-```
-  "Kestrel": {
-    "Endpoints": {
-      "Http": {
-        "Url": "http://localhost:58106"
-      }
-    }
-  },
-```
-Публикуем проект в папку, и запускаем исполняемый файл GuestBookApi.exe
-На этом настройка и установка программно-аппаратной части завершена!
+Публикуем проект в папку C:/GuestBookApi и запускаем исполняемый файл GuestBookApi.exe
+Копируем файл БД /GuestBookApi/GuestBookApi/GuestBook.mdf в папку C:/GuestBookApi
 
 ## Установка сервера клиентской части пользовательского интерфейса
 
 Проект находится в папке "guestbook".
-Указываем IP адрес и порт на котором будет запущена клиентская часть пользовательского интерфейса. Для этого в файле концигурации ./guestbook/src/services/config.json меняем:
-```
-apiUrl
-```
-Пример:
-```
-{
-    "apiUrl": "http://localhost:58106"
-}
-```
-
 Для сборки проекта необходим NodeJS. Инструкция для его установки находится по следующему адресу: [https://nodejs.org/ru/download/package-manager/](https://nodejs.org/ru/download/package-manager/)
 После его установки переходим в папку с проектом.
 В консоли необходимо выполнить следующие комманды:
 ```
 npm run build
-```
-Теперь собранные файлы приложения находятся в папке /guestbook/dist. Переносим их на сервер и выполняем команду
-```
 npm run serve
 ```
-Настройка и установка клиентской части пользовательского интерфейса завершена!
+После окончания работы приложение будет доступно по адресу
+```
+http://localhost:8080
+```
