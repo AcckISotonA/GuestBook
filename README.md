@@ -13,7 +13,6 @@
 - axios
 - vuex
 - vue-router
-- vee-validate
 
 Верстка адаптивная
 
